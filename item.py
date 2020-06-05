@@ -124,7 +124,6 @@ class FilterItem(Resource):
 
 
 def get(self):
-
     item_name = request.args.get('item_name')
     item = self.find_by_name(item_name)
     if item:
