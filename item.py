@@ -123,22 +123,22 @@ class FilterItem(Resource):
     TABLE_NAME = 'items'
 
 
-def get(self):
-    item_name = request.args.get('item_name')
-    item = self.find_by_name(item_name)
-    if item:
-        return item
-    return {'message': 'Item not found'}, 404
+    def get(self):
+        item_name = request.args.get('item_name')
+        item = self.find_by_name(item_name)
+        if item:
+            return item
+        return {'message': 'Item not found'}, 404
 
-@classmethod
-def find_by_name(cls, name):
-    connection = sqlite3.connect('data.db')
-    cursor = connection.cursor()
+    @classmethod
+    def find_by_name(cls, name):
+        connection = sqlite3.connect('data.db')
+        cursor = connection.cursor()
 
-    query = "SELECT * FROM {table} WHERE name=?".format(table=cls.TABLE_NAME)
-    result = cursor.execute(query, (name,))
-    row = result.fetchone()
-    connection.close()
+        query = "SELECT * FROM {table} WHERE name=?".format(table=cls.TABLE_NAME)
+        result = cursor.execute(query, (name,))
+        row = result.fetchone()
+        connection.close()
 
-    if row:
-        return {'item': {'name': row[0], 'price': row[1]}}
+        if row:
+            return {'item': {'name': row[0], 'price': row[1]}}
