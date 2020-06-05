@@ -1,4 +1,4 @@
-# Stores REST Api
+# Items API - HMHS Python API
 
 This is built with Flask, Flask-RESTful, Flask-JWT, and Flask-SQLAlchemy.
 
